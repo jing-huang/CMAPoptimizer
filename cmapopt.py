@@ -191,7 +191,6 @@ def gcstup2(ggrd,P1,P2):
     y1=[ggrd[1][IP2][IP1],ggrd[1][IP2][IP1P1],ggrd[1][IP2P1][IP1P1],ggrd[1][IP2P1][IP1]]
     y2=[ggrd[2][IP2][IP1],ggrd[2][IP2][IP1P1],ggrd[2][IP2P1][IP1P1],ggrd[2][IP2P1][IP1]]
     y12=[ggrd[3][IP2][IP1],ggrd[3][IP2][IP1P1],ggrd[3][IP2P1][IP1P1],ggrd[3][IP2P1][IP1]]
-    # print IP1,IP2,IP1P1,IP2P1
     return y,y1,y2,y12
 
 
@@ -300,12 +299,11 @@ def weightingcheck(a):
     top=int(-1*toppercent*nframe)
     b=sorted(a)[top:]
     c=sum(b)/sum(a)
-    #print top,c
     return bool(c<cutoff)
 
 def lefthelical(c1):
-# this subroutine readin the phi,psi angles and return an 0/1 array of same size indicating whether
-# the residues are left helical or not in each frame
+# this subroutine readin the phi,psi angles and return 0 or 1 indicating whether
+# there is left helix in this frame
 # the definition of left helical: three consecutive residues falling into alpha_L region (30 < phi< 100 and 7 < psi < 67)
     o1=[]
     nlen=len(c1[0])/2 # number of phi,psi data # have to be at least 5
@@ -353,28 +351,6 @@ def lefthelical2(c):
         o1=1
     return o1
 
-def helixdiff(o1,weight):
-    t=[]
-    tweight=0.0
-    for i in range(15):
-        t.append(0)
-
-    for ii in range(nframe):
-        tweight += weight[ii]
-        for i in range(15):
-            t[i] += o1[ii][i]*weight[ii]
-
-    for i in range(15):
-        t[i] = t[i]/tweight
-    tave=sum(t)/15.0
-    rms=0.0
-    # 300 K experimental data
-    texp=[0.194,0.174,0.161,0.262,0.214,0.255,0.245,0.240,0.289,0.230,0.224,0.173,0.141,0.175,0.128,0.000] #Shalongo's 1994 paper
-    for i in range(15):
-        rms += (t[i]-texp[i])*(t[i]-texp[i])
-    a=math.sqrt(rms/15.0)*100.0
-    return a,tave
-
 def leftamount(o1,weight):
     tweight=0.0
     oweight=0.0
@@ -382,8 +358,6 @@ def leftamount(o1,weight):
         tweight += weight[i]
         oweight += o1[i]*weight[i]
     return oweight/tweight
-        
-
 
 
 def rmsd(m1,m2):

@@ -1,0 +1,8 @@
+usage: pypy cmapopot.py cmap.c36.dat phipsi.gel.dat cmap.result.dat
+
+cmap.c36.dat is the original CMAP potential 
+phipsi.gel.dat contains the phi,psi data from the conformational ensemble generated with the original CMAP
+cmap.result.dat contains the optimized CMAP potential, written in the format of CHARMM parameter file
+
+
+
