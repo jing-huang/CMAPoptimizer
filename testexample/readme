@@ -1,0 +1,6 @@
+Under this directory is an example to run MD simulations with the CHARMM36m force field with either CHARMM tip3p water or an example modified alternative water model (see toppar_n010water_ions.str in toppar directory). 
+
+This is used for generating some of the results in the paper (Huang et al, Nat. Methods, 14, 71, 2017).
+
+CHARMM psf and crd files are read, and dcd files are written which can be directly used for analysis with CHARMM.
+
